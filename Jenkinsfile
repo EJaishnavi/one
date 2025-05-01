@@ -15,6 +15,7 @@ sh 'mvn clean package'
         stage("deploy to app server")
         {
           steps {
+            sh 'ls -la target/'
                 deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://54.226.54.3:8080')], 
                        contextPath: 'myapp', 
                        war: 'target/*.war'
