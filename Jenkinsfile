@@ -6,7 +6,7 @@ agent any
   }
 stages
   {
-    stage("maven-build)
+    stage("maven-build")
         {
       steps{
 sh 'mvn clean package'
