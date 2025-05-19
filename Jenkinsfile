@@ -16,7 +16,7 @@ sh 'mvn clean package'
         {
           steps {
             sh 'ls -la target/'
-                deploy adapters: [tomcat9(credentialsId: 'mytomcat', path: '', url: 'http://13.218.91.73:8080')], contextPath: 'swiggy', war: 'target/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'mytomcat', path: '', url: 'http://3.86.52.235:8080')], contextPath: 'swiggy', war: 'target/*.war'
             }
         }
       }        
