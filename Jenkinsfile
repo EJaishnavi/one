@@ -22,19 +22,22 @@ pipeline {
             }
         }
 
-        stage("deploy to app server") {
-            steps {
-                sh 'ls -la target/'
-                deploy adapters: [
-                    tomcat9(
-                        credentialsId: 'mytomcat',
-                        path: '',
-                        url: 'http://3.86.52.235:8080'
-                    )
-                ], contextPath: 'zomato', war: 'target/myweb-8.7.3.war'
-            }
+stage('Tag Release') {
+    when {
+        branch 'master' // optional: only tag on main branch
+    }
+    steps {
+        script {
+            def tagName = "v${env.BUILD_NUMBER}" // or use a custom version
+            sh """
+                git config user.email "jaishnavi9010.chv@outlook.com"
+                git config user.name "EJaishnavi"
+                git tag -a ${tagName} -m "Release version ${tagName}"
+                git push origin ${tagName}
+            """
         }
-
+    }
+}
         stage('Generate Version File') {
             steps {
                 script {
