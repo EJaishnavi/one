@@ -26,12 +26,15 @@ stage('Tag Release') {
     steps {
         script {
             def tagName = "v${env.BUILD_NUMBER}" // or use a custom version
-            sh """
-                git config user.email "jaishnavi9010.chv@outlook.com"
-                git config user.name "EJaishnavi"
-                git tag -a ${tagName} -m "Release version ${tagName}"
-                git push origin ${tagName}
-            """
+             withCredentials([usernamePassword(credentialsId: 'githubcrdentails', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                sh """
+                    git config user.email "jenkins@example.com"
+                    git config user.name "Jenkins CI"
+                    git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/your-user/your-repo.git
+                    git tag -a ${tagName} -m "Tagging release ${tagName}"
+                    git push origin ${tagName}
+                """
+            }
         }
     }
 }
