@@ -23,9 +23,6 @@ pipeline {
         }
 
 stage('Tag Release') {
-    when {
-        branch 'master' // optional: only tag on main branch
-    }
     steps {
         script {
             def tagName = "v${env.BUILD_NUMBER}" // or use a custom version
