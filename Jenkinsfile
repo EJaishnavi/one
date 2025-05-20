@@ -30,7 +30,7 @@ stage('Tag Release') {
                 sh """
                     git config user.email "jenkins@example.com"
                     git config user.name "Jenkins CI"
-                    git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/your-user/your-repo.git
+                    git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/EJaishnavi/one.git
                     git tag -a ${tagName} -m "Tagging release ${tagName}"
                     git push origin ${tagName}
                 """
